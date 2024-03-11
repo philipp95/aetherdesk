@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y*guk7+h!6im3z1tkudx^p^2t^_!8y9uyq&tv1o#tfgy&4ferm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aetherdesk.com', 'www.aetherdesk.com', 'aetherdesk-e961f6972918.herokuapp.com']
 
 
 # Application definition

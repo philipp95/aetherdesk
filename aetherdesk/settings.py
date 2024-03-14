@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y*guk7+h!6im3z1tkudx^p^2t^_!8y9uyq&tv1o#tfgy&4ferm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aetherdesk.com', 'www.aetherdesk.com', 'aetherdesk-e961f6972918.herokuapp.com']
+ALLOWED_HOSTS = ['aetherdesk.com', 'www.aetherdesk.com', 'aetherdesk-e961f6972918.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -119,7 +119,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

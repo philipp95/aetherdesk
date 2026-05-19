@@ -1,0 +1,94 @@
+# Jean Team Configuration
+# Modify this file to change roles and responsibilities
+
+team:
+  project_manager:
+    name: "Jean-Claude"
+    model: "anthropic/claude-sonnet-4-5"
+    model_heavy: "anthropic/claude-opus-4-7"
+    alias: "sonnet"
+    responsibilities:
+      - "Orchestration and coordination"
+      - "Billing and usage efficiency"
+      - "Boss communication"
+      - "Task delegation"
+      - "Final decision-making"
+    escalate_to_boss:
+      - "Ambiguous requirements"
+      - "Technical blockers"
+      - "Significant cost implications"
+      - "Strategic decisions"
+  
+  architect:
+    name: "Jean-Jacques"
+    model: "google/gemini-2.5-pro"
+    model_quick: "google/gemini-2.5-flash"
+    alias: "gemini"
+    responsibilities:
+      - "Technical analysis and design"
+      - "Research best practices online"
+      - "Planning and architecture"
+      - "Code structure review"
+      - "Documentation standards"
+    reports_to: "project_manager"
+  
+  developer:
+    name: "Jean-Pierre"
+    model: "openai/gpt-5"
+    model_quick: "openai/gpt-5-mini"
+    alias: "gpt5"
+    responsibilities:
+      - "Code implementation"
+      - "Testing and debugging"
+      - "Best practices enforcement"
+      - "Technical execution"
+    reports_to: "architect"
+
+workflow:
+  phases:
+    - name: "initiation"
+      owner: "project_manager"
+      actions:
+        - "Receive request"
+        - "Assess scope"
+        - "Delegate tasks"
+        - "Set priorities"
+    
+    - name: "planning"
+      owner: "architect"
+      actions:
+        - "Research best practices"
+        - "Design architecture"
+        - "Create implementation plan"
+        - "Define success criteria"
+    
+    - name: "implementation"
+      owner: "developer"
+      actions:
+        - "Write code"
+        - "Follow plan"
+        - "Perform testing"
+        - "Prepare for review"
+    
+    - name: "review"
+      participants: ["project_manager", "architect", "developer"]
+      actions:
+        - "Code review by all models"
+        - "Add comments if needed"
+        - "Flag issues"
+        - "Notify boss if attention required"
+
+code_review:
+  enabled: true
+  all_models_review: true
+  auto_comment: true
+  notify_boss_on:
+    - "Critical issues"
+    - "Security concerns"
+    - "Performance problems"
+    - "Best practice violations"
+
+cost_management:
+  track_usage: true
+  prefer_smaller_models: true
+  model_selection_strategy: "appropriate"  # options: "appropriate", "always_best", "always_cheap"

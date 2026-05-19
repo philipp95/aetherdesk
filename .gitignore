@@ -2,3 +2,14 @@ __pycache__/
 *.pyc
 jean-team-activity.log
 jean-team-log.json
+
+# Jean Team framework - local only
+JEAN_TEAM.md
+JEAN_CLAUDE_GUIDE.md
+README_JEAN_TEAM.md
+jean-team-config.yaml
+jean_orchestrator.py
+jean_workflow.sh
+IMPLEMENTATION_SUMMARY.md
+COMMIT_REVIEW_*.md
+test-commit.md

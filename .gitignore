@@ -1,7 +1,23 @@
+# Python
 __pycache__/
 *.pyc
-jean-team-activity.log
-jean-team-log.json
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# OpenClaw workspace files - should not be in project repos
+AGENTS.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+.openclaw/
 
 # Jean Team framework - local only
 JEAN_TEAM.md
@@ -13,3 +29,18 @@ jean_workflow.sh
 IMPLEMENTATION_SUMMARY.md
 COMMIT_REVIEW_*.md
 test-commit.md
+jean-team-activity.log
+jean-team-log.json
+
+# PR management tools - local only
+PULL_REQUEST_WORKFLOW.md
+STATUS_UPDATE.md
+create_pr.sh
+manage_pr.sh
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

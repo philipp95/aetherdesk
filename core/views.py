@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Post, LikePost, FollowersCount
@@ -8,6 +8,10 @@ from itertools import chain
 import random
 
 # Create your views here.
+def healthz(request):
+    return JsonResponse({"status": "ok"})
+
+
 @login_required(login_url='signin')
 def index(request):
     user_object = User.objects.get(username=request.user.username)

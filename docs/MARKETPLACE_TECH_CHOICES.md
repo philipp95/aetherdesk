@@ -1,13 +1,15 @@
 # Marketplace Tech Choices (Open Desk Platform)
 
-Last updated: 2026-05-20 (UTC)
+Last updated: 2026-05-21 (UTC)
 Goal: ship fast with low ongoing costs. Start simple; evolve.
+
+Implementation note: the deployment branch `feature/render-neon-cloudflare-stack` selects **Render + Neon + Cloudflare R2** for MVP hosting/storage while retaining Heroku compatibility via `Procfile`.
 
 ## Guiding Principles
 - Speed > perfection. Prefer mature, hosted services with minimal glue.
 - Low cost. Free/low tiers first; keep easy paths to scale.
 - 12‑factor config; no secrets in repo.
-- Keep current Heroku setup unless costs force change.
+- Prefer Render + Neon for the current MVP deployment; keep Heroku compatibility unless costs or platform needs force a change.
 
 ## Core Stack (Recommended v1)
 - Web: Django 4.2 (existing)
@@ -16,7 +18,7 @@ Goal: ship fast with low ongoing costs. Start simple; evolve.
 - Payments: Stripe Connect (Express or Standard; see below)
 - Email: Postmark (dev free credits) or Mailgun
 - Auth: Django auth; email login optional via django‑allauth (later)
-- Hosting: Heroku (Procfile exists). Alternatives: Render/Fly if cost becomes an issue
+- Hosting: Render (selected MVP target). Heroku compatibility retained via Procfile; Fly is a later alternative if global/runtime control matters.
 
 References:
 - Stripe Connect account types: https://docs.stripe.com/connect/accounts, https://docs.stripe.com/connect/express-accounts, https://docs.stripe.com/connect/standard-accounts
@@ -136,3 +138,41 @@ Docs: cloudflare R2 + django‑storages
 
 ---
 This doc captures recommended v1 decisions optimized for speed and cost. Adjust per discussion.
+
+## Why these vs alternatives (fast/low-cost rationale)
+
+Database (Postgres: Neon or Heroku PG)
+- Why: first-class with Django, transactions/constraints suit bookings; Neon free/serverless is cheap to start; Heroku PG is zero-config on Heroku.
+- Alternatives: Supabase (great DX but tighter lock-in), AWS RDS/Aurora (powerful, higher ops/cost), MySQL (fine but Postgres features fit better), Mongo/Firebase (non-relational; harder for reservations).
+
+Object storage (Cloudflare R2 via django-storages)
+- Why: S3-compatible, low egress via Cloudflare, inexpensive; easy CDN.
+- Alternatives: AWS S3+CloudFront (gold standard but pricier/complex), Backblaze B2 (cheap; add CDN separately), Supabase Storage (DX good; platform lock-in).
+
+Payments (Stripe Connect: Express or Standard)
+- Why: fastest compliant marketplace payouts; mature docs/webhooks.
+- Express vs Standard: Express gives payout control + platform fees (small per-account fee). Standard is cheapest ops but less control.
+- Alternatives: Adyen MarketPay (enterprise; heavy), PayPal Commerce (broad but weaker marketplace APIs), Mangopay (EU-focused; more overhead).
+
+Hosting (Heroku)
+- Why: quickest path with existing Procfile; minimal ops.
+- Alternatives: Render (cheaper, simple autosleep), Fly.io (global, more ops), Railway (easy but spiky pricing), DO App Platform/EC2 (more ops), Vercel/Netlify (backend workarounds).
+
+Email (Postmark/Mailgun)
+- Why: reliable deliverability, simple pricing.
+- Alternatives: SendGrid (popular; mixed low-tier deliverability), AWS SES (cheapest but more setup), Resend (modern DX; maturing).
+
+Auth (Django auth; allauth later)
+- Why: built-in, free, low complexity.
+- Alternatives: allauth (easy email/social), Auth0/Clerk (polished SaaS; monthly cost), Firebase Auth (JS-first).
+
+Search & geo
+- Start with SQL filters (city/date); upgrade to PostGIS for distance.
+- Alternatives: Algolia/Meilisearch/Typesense (great UX; extra infra/cost).
+
+Images
+- Start: Pillow + originals on R2.
+- Alternatives: Cloudinary/ImageKit (instant transforms/CDN; monthly fees).
+
+Monitoring
+- Start: Django/Heroku logs; add Sentry free tier if needed.

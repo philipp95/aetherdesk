@@ -1,13 +1,15 @@
 # Marketplace Tech Choices (Open Desk Platform)
 
-Last updated: 2026-05-20 (UTC)
+Last updated: 2026-05-21 (UTC)
 Goal: ship fast with low ongoing costs. Start simple; evolve.
+
+Implementation note: the deployment branch `feature/render-neon-cloudflare-stack` selects **Render + Neon + Cloudflare R2** for MVP hosting/storage while retaining Heroku compatibility via `Procfile`.
 
 ## Guiding Principles
 - Speed > perfection. Prefer mature, hosted services with minimal glue.
 - Low cost. Free/low tiers first; keep easy paths to scale.
 - 12‑factor config; no secrets in repo.
-- Keep current Heroku setup unless costs force change.
+- Prefer Render + Neon for the current MVP deployment; keep Heroku compatibility unless costs or platform needs force a change.
 
 ## Core Stack (Recommended v1)
 - Web: Django 4.2 (existing)
@@ -16,7 +18,7 @@ Goal: ship fast with low ongoing costs. Start simple; evolve.
 - Payments: Stripe Connect (Express or Standard; see below)
 - Email: Postmark (dev free credits) or Mailgun
 - Auth: Django auth; email login optional via django‑allauth (later)
-- Hosting: Heroku (Procfile exists). Alternatives: Render/Fly if cost becomes an issue
+- Hosting: Render (selected MVP target). Heroku compatibility retained via Procfile; Fly is a later alternative if global/runtime control matters.
 
 References:
 - Stripe Connect account types: https://docs.stripe.com/connect/accounts, https://docs.stripe.com/connect/express-accounts, https://docs.stripe.com/connect/standard-accounts

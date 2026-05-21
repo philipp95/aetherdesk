@@ -1,6 +1,6 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
 .Python
@@ -10,9 +10,38 @@ __pycache__/
 dist/
 build/
 
-# IDEs
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local environment/secrets
+.env
+.env.*
+!.env.example
+*.log
+
+# Local database and generated assets
+db.sqlite3
+staticfiles/
+media/
+
+# IDEs / OS files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.DS_Store
+
+# OpenClaw agent workspace files
+.openclaw/
+AGENTS.md
+BOOTSTRAP.md
+HEARTBEAT.md
+IDENTITY.md
+MEMORY.md
+SOUL.md
+TOOLS.md
+USER.md
+memory/
